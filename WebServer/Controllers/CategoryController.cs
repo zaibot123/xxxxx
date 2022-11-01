@@ -74,6 +74,7 @@ namespace WebServer.Controllers
         private CategoryModel CreateCategoryModel(Category category)
         {
             var model = _mapper.Map<CategoryModel>(category);
+
             model.Url = _generator.GetUriByName(HttpContext, nameof(GetCategory), new { category.Id });
             return model;
         }

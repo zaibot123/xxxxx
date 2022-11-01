@@ -11,6 +11,8 @@ namespace Assignment4.Tests
         private const string CategoriesApi = "http://localhost:5001/api/categories";
         private const string ProductsApi = "http://localhost:5001/api/products";
 
+
+#if  comment
         /* /api/categories */
         public void ApiCategories_GetWithNoArguments_OkAndAllCategories()
         {
@@ -21,6 +23,7 @@ namespace Assignment4.Tests
             Assert.Equal("Beverages", data.First()["name"]);
             Assert.Equal("Seafood", data.Last()["name"]);
         }
+
 
         [Fact]
         public void ApiCategories_GetWithValidCategoryId_OkAndCategory()
@@ -39,6 +42,7 @@ namespace Assignment4.Tests
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
+#endif
         [Fact]
         public void ApiCategories_PostWithCategory_Created()
         {
@@ -227,6 +231,8 @@ namespace Assignment4.Tests
                 "application/json");
             var response = client.PostAsync(url, requestContent).Result;
             var data = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(data);
+            Console.WriteLine("JAAAAAAAAAAAAAAAAAAAAA");
             return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
         }
 
